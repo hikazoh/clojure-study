@@ -11,6 +11,7 @@
   [& args]
   (def ch (chan))
   (def data (ref (.toString (Date.))))
+  (def color (ref Color/black))
   (def frame (JFrame. "hikazoh's test frame"))
   (def panel
     (proxy [JPanel] []
@@ -18,7 +19,7 @@
         (do
           (.setColor g Color/white )
           (.fillRect g 0 0 500 500)
-          (.setColor g Color/black)
+          (.setColor g @color)
           (.drawString  g @data 100 100 )))))
   (.setTitle frame "Hikazoh's Title")
   (.setSize frame 200 200 )
@@ -29,9 +30,9 @@
    (reify ActionListener
      (actionPerformed [this e]
        (do
-         (JOptionPane/showMessageDialog frame (JLabel. "Clicked!!"))
-         (go
-           (>! ch "Clicked Clicked Clicked"))))))
+         (JOptionPane/showMessageDialog frame (JLabel. "Change Color"))
+         (dosync (ref-set color Color/red))))))
+
   (.add frame button BorderLayout/NORTH)
   (.add frame panel BorderLayout/CENTER)
   (go-loop[]
