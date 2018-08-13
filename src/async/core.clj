@@ -22,7 +22,7 @@
           (.setColor g @color)
           (.drawString  g @data 100 100 )))))
   (.setTitle frame "Hikazoh's Title")
-  (.setSize frame 200 200 )
+  (.setSize frame 500 500 )
   (.setLocationRelativeTo frame nil)
   (.setDefaultCloseOperation frame JFrame/EXIT_ON_CLOSE)
   (def button (JButton. "Click Me!"))
